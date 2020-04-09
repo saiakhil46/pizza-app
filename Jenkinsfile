@@ -13,7 +13,7 @@ pipeline {
             steps {
                 buildName "${params.image_tag}"
                 script {
-                    app = docker.build(saiakhil46/ownkubeproject:${params.image_tag})
+                    app = docker.build(saiakhil46/ownkubeproject)
                 }
             }
         }
