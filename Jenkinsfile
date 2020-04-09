@@ -12,7 +12,7 @@ pipeline {
           
             steps {
                 buildName "${params.image_tag}"
-                sh "sudo docker build -t saiakhil46/ownkubeproject:${params.image_tag}"
+                sh "sudo docker build -t saiakhil46/ownkubeproject:${params.image_tag} ."
             }
         }
         stage('Push Docker Image') {
