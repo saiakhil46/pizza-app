@@ -12,20 +12,16 @@ pipeline {
           
             steps {
                 buildName "${params.image_tag}"
-                script {
-                    app = docker.build(saiakhil46/ownkubeproject)
-                }
+                sh "sudo docker build -t saiakhil46/ownkubeproject:${params.image_tag}"
             }
         }
         stage('Push Docker Image') {
           
             steps {
                 
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${params.image_tag}")
-                        
-                    }
+                withCredentials([usernamePassword(credentialsId: 'docker_hub_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
+                sh 'sudo docker login -u $USERNAME -p $USERPASS'
+                sh 'sudo docker push saiakhil46/ownkubeproject:${params.image_tag}'
 
                 }
             }
