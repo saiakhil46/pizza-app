@@ -2,7 +2,7 @@ name: Pizza-App
 
 on:
   repository_dispatch:
-    types: pizza-app-trigger
+    types: pizza-app-trigger-${{ github.event.client_payload.tag }}
 
 jobs:
   Build-and-Push:
