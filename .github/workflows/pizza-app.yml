@@ -2,7 +2,7 @@ name: Pizza-App
 
 on:
   repository_dispatch:
-    types: do-something
+    types: pizza-app-trigger
 
 jobs:
   Build-and-Push:
@@ -22,8 +22,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: saiakhil46/pizza-app:release-1.0.1
-          
+          tags: saiakhil46/pizza-app:${{ github.event.client_payload.tag }}
+
       - name: Do Something
         run: echo Doing Something...
 
