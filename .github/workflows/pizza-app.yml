@@ -23,9 +23,3 @@ jobs:
           context: .
           push: true
           tags: saiakhil46/pizza-app:${{ github.event.client_payload.tag }}
-
-      - name: Do Something
-        run: echo Doing Something...
-
-      - name: Do Something Based On Triggered Event Data
-        run: 'echo "Triggered event text: ${{ github.event.client_payload.text }}"'    
