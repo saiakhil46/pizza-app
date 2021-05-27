@@ -1,8 +1,14 @@
 name: Pizza-App 
 
 on:
-  repository_dispatch:
-    types: pizza-app-trigger
+  workflow_dispatch:
+    inputs:
+      git_branch_or_tag:
+        description: 'git_branch_or_tag'
+        required: true
+      docker_tag:
+        description: 'docker_tag'
+        required: true
 
 jobs:
   Build-and-Push:
@@ -10,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.git_branch_or_tag }}
   
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -22,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: saiakhil46/pizza-app:${{ github.event.client_payload.tag }}
+          tags: saiakhil46/pizza-app:${{ github.event.inputs.docker_tag }}
